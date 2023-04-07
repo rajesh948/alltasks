@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+     body{
+        background-color: rgb(142, 181, 141);
+     }
+        table,
+        td,
+        th {
+            margin:auto ;
+            font-size:large;
+            border: 2px solid rgb(33, 80, 48);
+            border-collapse: collapse;
+        }
+
+        th{
+        background-color:rgb(66, 125, 65);
+        color: rgb(200, 224, 190);
+        padding: 10px;
+        font-size: x-large;
+        }
+        
+ tr:nth-child(even){
+    background-color:rgb(139, 195, 137);
+   
+ }
+         
+ tr:nth-child(odd){
+    background-color:rgb(181, 230, 181);
+   
+ }
+        td {
+            text-align: center;
+            padding: 5px;
+        }
+
+        .pageno{
+            display: inline-block;
+            text-align: center;
+            border: 2px solid rgb(132, 213, 139);
+            border-radius: 20px;
+            background-color:  rgb(29, 143, 38)
+            ;
+        }
+
+
+        #pre,#next{
+      
+           display: inline-block;
+            border: 2px solid rgb(35, 107, 48);
+            border-radius: 10px;
+            background-color: rgb(121, 233, 132);
+        }
+
+        #pgn{
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        #pageno1{
+            display: inline-block;
+            text-align: center;
+            border: 2px solid rgb(22, 88, 19);
+            border-radius: 20px;
+            background-color:rgb(132, 213, 139) ;
+        }
+        .btn{
+            font-size:x-large;
+            font-weight:900;
+            padding: 30px;
+            text-decoration: none;
+            text-align: center;
+        }
+        h1{
+            border: 1px solid rgb(95, 128, 60);
+            background-color: rgb(15, 88, 18);
+            color: rgb(70, 204, 110);
+            text-align: center;
+        }
+        #link{
+            padding-top: 20px;
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Data</h1>
+
+ 
+        <table>
+
+            <tr>
+                <th>Student Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>DOB</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Collage</th>
+                <th>City</th>
+            </tr>
+            <% for(let i=0;i<result.length;i++){ %>
+                <tr>
+
+                    <td><%= result[i].student_id %></td>
+                    <td><%= result[i].firstname %></td>
+                    <td><%= result[i].lastname %></td>
+                    <td><%= result[i].dob.getDate()%>-<%=result[i].dob.getMonth()%>-<%=result[i].dob.getFullYear() %></td>
+                    <td><%= result[i].contact %></td>
+                    <td><%= result[i].email %></td>
+                    <td><%= result[i].collage %></td>
+                    <td><%= result[i].city %></td>
+
+                </tr>
+          <%}%>
+        </table>
+    <div id="link">
+        <div id="pre"><a class="btn" href="/page?no=<%=(key-1)%>"><</a></div>
+        
+        <% for(let n=0;n < total;n++){ %>
+             <%if(n==(key-1)){%>
+                <div id="pageno1"><a id="pgn" href="/page?no=<%=(n+1)%>"><%=(n+1)%></a></div>
+           <% }else{%>
+            <div class="pageno"><a id="pgn" href="/page?no=<%=(n+1)%>"><%=(n+1)%></a></div>
+            <%}%>
+            <%}%>
+            
+        <div id="next"><a class="btn" href="/page?no=<%=(key+1)%>">></a></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <div class="register">
+
+
+                <div class="register_in">
+                    <div>
+                        <img src="./image/logo.svg" />
+                    </div>
+                    <h2>Welcome Back!</h2>
+                    <form action="/login" onsubmit="return validRegister()" method="post">
+            
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="<%=email%>" />
+                       
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" value="<%=password%>"/>
+                        <p class="error" id="errorText"><%=errorMessage%></p>
+                        <p class="link2">Forgot Password?<a href="/login">Click Here.</a></p>
+           
+                        <input class="btn" type="submit" value="Sign In">
+                    </form>
+                    <p class="link">Don't have an account?<a href="/registration">Sign up Here</a></p>
+                </div>
+                
+                <div class="bottom_logo"><img src="./image/bottom-logo.png"/></div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+function validRegister() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+         
+            if (email == "") {
+
+                document.getElementById("errorText").innerHTML = "Please Enter Email";
+                return false;
+            }else{
+                document.getElementById("errorText").innerHTML = "";
+            }
+
+            if (password == "") {
+                document.getElementById("errorText").innerHTML = "Please Enter Password";
+                return false;
+            }else{
+                document.getElementById("errorText").innerHTML = "";
+            }
+            }
+    </script>
+</body>
+
+</html>

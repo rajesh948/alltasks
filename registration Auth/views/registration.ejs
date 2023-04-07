@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <div class="register">
+
+
+                <div class="register_in">
+                    <div>
+                        <img src="./image/logo.svg" />
+                    </div>
+                    <h2>Welcome Back!</h2>
+                    <form action="/register" onsubmit=" return validRegister()" method="post">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" />
+                        <p id="nameerror" class="error"></p>
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" onchange="checkemail(this.value)" />
+                        <p id="emailerror" class="error"></p>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" />
+                        <p id="passworderror" class="error"></p>
+                        <label for="repassword">Confirm Password</label>
+                        <input type="password" id="repassword" name="repassword" />
+                        <p id="repassworderror" class="error"></p>
+                        <input class="btn" type="submit" value="Sign Up" />
+                    </form>
+                    <p class="lastpara">Already have an account?<a href="/login">Sign in Here</a></p>
+                </div>
+
+                <div class="bottom_logo"><img src="./image/bottom-logo.png" /></div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+
+ async function checkemail(mail){
+
+    const emailQuery = await fetch(`/checkmail?email=${mail}`);
+    var emailcheck = await emailQuery.json();
+
+    if(emailcheck.is){
+        document.getElementById("emailerror").innerHTML= "Email Already Exist ";
+        return false;
+    }else{
+        document.getElementById("emailerror").innerHTML= "";
+    }
+
+}
+
+    async     function validRegister() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var repassword = document.getElementById("repassword").value;
+            var regEmail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+           var abc= await checkemail(email);
+           console.log("ACB ::::",abc);
+            if (name == "") {
+
+                document.getElementById("nameerror").innerHTML = "Please Enter Your Name";
+                return false;
+            }else{
+                document.getElementById("nameerror").innerHTML = "";
+            }
+
+            if (email == "") {
+                document.getElementById("emailerror").innerHTML = "Please Enter Your Email";
+                return false;
+            } else if(!regEmail.test(email)){
+               document.getElementById("emailerror").innerHTML = "Please Enter Valid Email";
+               return false;
+
+            } else{
+                document.getElementById("emailerror").innerHTML = "";
+            }
+
+
+            if (password == "") {
+
+                document.getElementById("passworderror").innerHTML = "Please Enter Your Password";
+                return false;
+            }else if(!(/(?=.*\d)(?=.*[a-z])(?=.*[@#*])(?=.*[A-Z]).{8,}/.test(password))){
+                document.getElementById("passworderror").innerHTML = "Password must contain one number,Uppercase,Lowercase,(@,#,*)";
+                return false;
+
+            }else{
+                document.getElementById("passworderror").innerHTML = "";
+            }
+
+            if (repassword == "") {
+
+                document.getElementById("repassworderror").innerHTML = "Please Enter Your RePassword";
+                return false;
+            }else if(!repassword == password){
+                document.getElementById("repassworderror").innerHTML = "Please Enter valid RePassword";
+                return false;
+            }else{
+
+                document.getElementById("repassworderror").innerHTML = "";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

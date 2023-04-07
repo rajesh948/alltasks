@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="querys"></div>
+    <script>
+   randomGen();
+   function randomGen(){
+   const firstname = ["rajesh","ravi","rakesh","chintan","nisharg","sanjay","sagar","rocky","raj","meet","keval","disha","poonam","darshan","kishan","rutvi","krishna","mital","rushi","khushi","meera","ram","vivek","vijay","samir","tushar","sheeta","geeta","sumit","shital","shangita","ajay","arvind"];
+   const lastname = ["shah","sojitra","gor","rathod","patel","chavda","parmar","dabhi","kansagara","dave","yadav","kadival","makheja"];
+   const city = ["rajkot","morbi","surat","j&k","bhavnagar","banaskatha","bhuj","tankara","mumbai","delhi","vadorad","kathua","lakhnav","chennai","pune","bengalor","telangan","kolkata"];
+   const collage = ["GEC","Marwadi University","silver oak","stanford","lj","brown","parul","baylor","banaras","GEC bhavnagar","GEC rajkot","GEC modasa","MSU","LDCE","LE collage","darshan","SGGU","HNGU","saurashtra","BKNM","viswakarma","GEC ahmdabad","GAC","UID","GTU","nabajyoti","synergem power plant institute","BIT","MGM","JNTUK","kongunadu","sitaram harijan"];
+     var query = "";
+    query += "insert into collageDB.studentMaster (sFirstName,sLastName,sContact,sEmail,sCollageId,sCity) values";
+
+     for(let i=0;i<5000;i++){
+   var firstRandom = firstname[Math.floor(Math.random()*firstname.length)];
+   var lastRandom = lastname[Math.floor(Math.random()*lastname.length)];
+  // var collageRandom = collage[Math.floor(Math.random()*collage.length)];
+  var collageRandom = Math.floor(1+Math.random()*((collage.length)-1));
+  
+   var email = `${firstRandom}${lastRandom}${Math.floor(Math.random()*100)}@gmail.com`;
+   var contact = Math.floor(9000000000+Math.floor(Math.random()*999999999));
+   var cityrandom = city[Math.floor(Math.random()*city.length)];
+   query+=`("${firstRandom}","${lastRandom}","${contact}","${email}","${collageRandom}","${cityrandom}"),`;
+
+     }
+     query+=";";
+     document.getElementById("querys").innerHTML= query;
+    }
+
+    </script>
+</body>
+</html>

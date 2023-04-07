@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoB Application From</title>
+    <style>
+        fieldset {
+            border-width: 5px;
+            display: inline;
+            margin-bottom: 30px;
+            margin-right: 30px;
+            background-color: wheat;
+        }
+        legend{
+            font-weight: bold;
+            font-size: large;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        .btn {
+            margin: auto;
+            width: fit-content;
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+            background-color: rgb(220, 132, 76);
+            cursor: pointer;
+        }
+        h1{
+            margin: 0px;
+            border: 2px solid rgb(252, 250, 249);
+            background-color: brown;
+            text-align: center;
+            color: aqua;
+        }
+        #head{
+            
+            border: 2px solid rgb(215, 85, 30);
+        }
+        hr{
+            border: 1px solid black;
+        }
+        #btns{
+            width: fit-content;
+            margin: auto;
+        }
+        .btn2{
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px;
+            background-color: rgb(112, 189, 176);
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="head"><h1>Job Application Form</h1></div>
+    <form action="/formdata" method="post">
+
+        <fieldset id="basicform">
+            <legend>Basic Detail</legend>
+            <table id="basicdetail">
+                <tr>
+                    <td><label for="fname">First Name</label></td>
+                    <td><input type="text" id="fname" name="firstname" required></td>
+                    <td><label for="lname">Last Name</label></td>
+                    <td><input type="text" id="lastname" name="lastname" required></td>
+                </tr>
+                <tr>
+                    <td><label for="dsn">Designation</label></td>
+                    <td><input type="text" id="dsn" name="designation" required></td>
+                    <td><label for="addes1">Address 1</label></td>
+                    <td><textarea id="addes1" name="address1" required></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="email" id="email" name="email" required></td>
+                    <td><label for="addes2">Address 2</label></td>
+                    <td><textarea id="addes2" name="address2" required></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="phone">Phone Number</label></td>
+                    <td><input type="tel" id="phone" name="phone" required></td>
+                    <td><label for="state">State</label></td>
+                    <td> <select id="state" onchange="getcity(this)" name="state">
+                        <option>Select State</option>
+                        <% for(let i=0;i<state.length;i++){%>
+                            <option  value="<%=state[i].statename%>"><%=state[i].statename%></option>
+                        <%}%>
+                   
+                        </select></td>
+                   
+                </tr>
+                <tr>
+                    <td><label for="gender">Gender</label></td>
+                    <td><input type="radio" value="male"  name="gender">Male
+                        <input type="radio" value="female"  name="gender">Female
+                        <input type="radio" value="other"  name="gender">Other
+                    </td>
+                    <td><label for="city">City</label></td>
+                    <td ><select id="selectcity" name="city">                   
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><label for="relstatus">Relationship Status</label></td>
+                    <td><select id="relstatus" name="relation">
+                        <% for(let i=0;i<relstatus.length;i++){%>
+                            <option value="<%=relstatus[i].rel%>"><%=relstatus[i].rel%></option>
+                        <%}%>   
+                     
+                        </select></td>
+                        <td><label for="zip">Zip Code</label></td>
+                        <td><input type="text" id="zip" name="zipcode" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><label for="dob">Date Of Birth</label></td>
+                    <td><input type="date" id="dob" name="dob" required></td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset id="eduform">
+            <legend>Education Detail</legend>
+            <table id="edu">
+                <tr>
+         
+                    <td><label for="course1">1. Course Name</label></td>
+                    <td><select id="course1" name="course">
+                        <% for(let i=0;i<course.length;i++){%>
+                            <option value="<%=course[i].course%>"><%=course[i].course%></option>
+                        <%}%>   
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><Label for="nob1">Name Of Board</Label></td>
+                    <td><input type="text" id="nob1" name="board" required/></td>
+                    <td><Label for="pyear1">Passing Year</Label></td>
+                    <td><input type="text" id="pyear1" name="year" required/></td>
+                    <td><Label for="prt1">Percentage</Label></td>
+                    <td><input type="text" id="prt1" name="percentage" required/></td>
+                </tr>
+            </table>
+            <div onclick="addedu()" class="btn">ADD Field</div>
+        </fieldset>
+
+        <fieldset id="expform">
+            <legend>Work Experience</legend>
+            <table id="experience">
+                <tr>
+                    <td><Label for="com1">1.Company Name</Label></td>
+                    <td><input type="text" id="com1" name="compname" required/></td>
+                    <td><Label for="dsgn1">Designation</Label></td>
+                    <td><input type="text" id="dsgn1" name="expedesignation" required/></td>
+                    <td><Label for="fdate1">From</Label></td>
+                    <td ><input type="date" id="fdate1" name="fdate" required/></td>
+                    <td><Label for="todate1">To</Label></td>
+                    <td><input type="date" id="todate1" name="todate" required/></td>
+                </tr>
+            </table>
+            <div onclick="addexp()" class="btn">ADD Field</div>
+        </fieldset>
+
+        <fieldset id="langform">
+            <legend>Language Known</legend>
+            <table id="language">
+                <%for(let i=0;i<language.length;i++){%>
+                    <tr>
+                        <td><input type="checkbox" value="<%=language[i].lang%>" name="language" /><%=language[i].lang%></td>
+                        <td><input type="checkbox" value="<%=language[i].lang%>" name="read" />Read</td>
+                        <td><input type="checkbox" value="<%=language[i].lang%>" name="write" />Write</td>
+                        <td><input type="checkbox" value="<%=language[i].lang%>" name="speak" />Speak</td>
+                    </tr>
+                    
+                    <%}%>
+            </table>
+        </fieldset>
+
+        <fieldset id="techform">
+            <legend>Technologies You Know</legend>
+            <table id="technologies">
+              <%for(let i=0;i<technology.length;i++){%>
+                  <tr>
+                      <td><input type="checkbox" value="<%=technology[i].tech%>" name="technology" id="<%=technology[i].tech%>" /><%=technology[i].tech%></td>
+                      <td><input type="radio" value="beginer" name="level<%=technology[i].tech%>" />Beginer</td>
+                      <td><input type="radio" value="mideater" name="level<%=technology[i].tech%>" />Mideater</td>
+                      <td><input type="radio" value="expert" name="level<%=technology[i].tech%>" />Expert</td>
+                    </tr>
+                    
+                    <%}%>
+            </table>
+        </fieldset>
+
+        <fieldset id="refform">
+            <legend>Reference Contact</legend>
+            <table id="reference">
+                <tr>
+                    <td><Label for="name1">Name</Label></td>
+                    <td><input type="text" name="refname" id="name1" required/></td>
+                    <td><Label for="content1">Contact Number</Label></td>
+                    <td><input type="text" name="refcontact" id="contact1" required/></td>
+                    <td><Label for="relation1">Relation</Label></td>
+                    <td><input type="text" name="refrelation" id="relation1" required/></td>
+                </tr>
+                <tr>
+                    <td><Label for="name2">Name</Label></td>
+                    <td><input type="text" name="refname" id="name2" /></td>
+                    <td><Label for="contentno2">Contact Number</Label></td>
+                    <td><input type="text" name="refcontact" id="contentno2" /></td>
+                    <td><Label for="relation2">Relation</Label></td>
+                    <td><input type="text" name="refrelation" id="relation2" /></td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset id="prfform">
+            <legend>Preferances</legend>
+            <table id="Preferance">
+                <tr>
+                    <td><Label for="Prf">Preferd Location</Label></td>
+                    <td>
+                        <select id="prf" name="prflocation">
+                           
+                            <% for(let i=0;i<preflocation.length;i++){%>
+                                <option value="<%=preflocation[i].preflocation%>"><%=preflocation[i].preflocation%></option>
+                            <%}%> 
+                
+                        </select>
+                    </td>
+                    <td><Label for="notperiod">Notice Period</Label></td>
+                    <td><input type="text" name="noticeperiod" id="notperiod" required/></td>
+                    <td><Label for="department">Department</Label></td>
+                    <td>
+                        <select name="department" id="department">
+                            <% for(let i=0;i<preflocation.length;i++){%>
+                                <option value="<%=department[i].department%>"><%=department[i].department%></option>
+                            <%}%> 
+                           
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <select id="prf2" name="prflocation">
+                            <% for(let i=0;i<preflocation.length;i++){%>
+                                <option value="<%=preflocation[i].preflocation%>"><%=preflocation[i].preflocation%></option>
+                            <%}%> 
+                        </select>
+                    </td>
+                    <td><Label for="expactedctc">Expected CTC</Label></td>
+                    <td><input type="text" name="expactedctc" id="expactedctc" required/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <select id="prf3" name="prflocation">
+                            <% for(let i=0;i<preflocation.length;i++){%>
+                                <option value="<%=preflocation[i].preflocation%>"><%=preflocation[i].preflocation%></option>
+                            <%}%> 
+                        </select>
+                    </td>
+                    <td><Label for="currentctc">Current CTC</Label></td>
+                    <td><input type="text" name="currentctc" id="currentctc" required/></td>
+
+                </tr>
+            </table>
+        </fieldset>
+
+        <div id="btns"><input id="submit" class="btn2" type="submit" ><input id="reset" class="btn2" type="reset"></div>
+    </form>
+    <script>
+        var n = 1;
+        var n2 = 1;
+
+        function addedu() {
+            n += 1;
+            var tab = document.getElementById("edu");
+            var trow = tab.insertRow();
+            trow.innerHTML = `<td colspan="6"><hr></td>`;
+            var trow1 = tab.insertRow();
+           
+           trow1.innerHTML =  ` <td><label for="course${n}">${n}. Course Name</label></td>
+                    <td><select id="course${n}" name="course">
+                        <% for(let i=0;i<course.length;i++){%>
+                            <option value="<%=course[i].course%>"><%=course[i].course%></option>
+                        <%}%>   
+    
+                        </select></td>`;
+            var trow2 = tab.insertRow();
+            trow2.innerHTML = `
+                <td><Label for="nob${n}">Name Of Board</Label></td>
+                <td><input type="text" id="nob${n}" name="board" required/></td>
+                <td><Label for="pyear${n}">Passing Year</Label></td>
+                <td><input type="text" id="pyear${n}" name="year" required/></td>
+                <td><Label for="prt${n}">Percentage</Label></td>
+                <td><input type="text" id="prt${n}" name="percentage" required/></td>
+            `;
+
+        }
+
+
+        function addexp() {
+            n2 += 1;
+            var tab = document.getElementById("experience");
+            var trow1 = tab.insertRow();
+            var trow = tab.insertRow();
+            trow1.innerHTML = `<td colspan="8"><hr></td>`;
+            trow.innerHTML = `  <tr>
+                    <td><Label for="com${n2}">${n2}. Company Name</Label></td>
+                    <td><input type="text" id="com${n2}" name="compname" required/></td>
+                    <td><Label for="dsgn${n2}">Designation</Label></td>
+                    <td><input type="text" id="dsgn${n2}" name="expedesignation" required/></td>
+                    <td><Label for="fdate${n2}">From</Label></td>
+                    <td><input type="date" id="fdate${n2}" name="fdate" required/></td>
+                    <td><Label for="todate${n2}">To</Label></td>
+                    <td><input type="date" id="todate${n2}" name="todate" required/></td>
+                </tr>`;
+        }
+
+
+    async function getcity(state){
+        console.log(state.value);
+        const ans = await fetch(`http://localhost:8070/getcity?statename=${state.value}`);
+
+        const data = await ans.json();
+      
+        var selectcity = document.getElementById('selectcity');
+        selectcity.innerHTML="";
+
+       for(let i=0;i<data.length;i++){
+        const option = new Option(data[i].cityname, data[i].cityname);
+        selectcity.add(option);
+       }
+
+        // console.log(data);
+    }
+    
+    </script>
+</body>
+
+</html>

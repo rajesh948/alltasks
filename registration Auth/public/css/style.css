@@ -1,0 +1,116 @@
+*{
+    padding:0%;
+    margin: 0%;
+    
+}
+body{
+    background-image: url("/image/auth-bg.png");
+}
+
+.white{
+    color: white;
+    padding: 40px;
+}
+
+.btnlogout{
+    text-decoration: none;
+    border: 1px solid yellow;
+    background-color: yellow;
+    border-radius: 12px;
+    font-weight: 800;
+    color: black;
+    font-size: 1.5rem;
+    padding: 10px 40px;
+}
+
+.container{
+    width: 1140px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.register{
+    margin: 0 -16px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.register form{
+    display: flex;
+    flex-direction: column;
+}
+
+.register_in{
+
+    width: 30%;
+    margin-left: 120px;
+    display: flex;
+    flex-direction: column;
+    padding:50px 60px;
+    background-color:rgb(0,0,0,0.5);
+
+
+}
+
+.register_in img{
+ margin: 40px 0;
+
+}
+.register_in h2{
+    padding: 20px 0;
+    color: white;
+    font-size: 1.6rem;
+}
+
+form label{
+    color: white;
+
+}
+form input{
+    padding: 10px;
+    margin-bottom:20px ;
+}
+
+.btn{
+    background-color: #174F2A;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+.link2{
+    margin: 20px;
+    color: white;
+}
+
+.link2 a{
+    color: #A4843F;
+}
+
+.link{
+    margin-top: 170px;
+    color: white;
+}
+
+.link a{
+    color: #A4843F;
+}
+
+.bottom_logo{
+    width: 40%;
+    display: flex;
+    margin-top: 50%;
+    justify-content: flex-end;
+}
+
+.lastpara{
+    margin-top: 80px;
+    color: white;
+}
+
+.lastpara a{
+    color: #A4843F;
+}
+.error{
+    color: red;
+}
+

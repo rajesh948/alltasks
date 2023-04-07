@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Cube</title>
+    <style>
+
+        *{
+            background-color: rgb(211, 164, 223);
+        }
+        
+        td {
+            width: 50px;
+            height: 50px;
+            border: 2px solid ;
+            border-radius: 5px;
+            }
+
+        table {
+            width: 630px;
+            height: 630px;  
+      border: 2px solid ;
+      border-radius: 5px;
+      background-color: rgb(134, 241, 245);
+        }
+
+        #time {
+
+            display: inline;
+            font-size: large;
+            font-weight: bold;
+            border: 2px solid rgb(168, 60, 60);
+            background-color: rgb(105, 72, 133);
+            color: rgb(113, 106, 223);
+        }
+
+        #counts {
+            display: inline;
+            border: 2px solid black;
+            background-color: rgb(42, 202, 90);
+            color: rgb(236, 240, 30);
+        }
+
+        #tab {
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+
+        <h1>Color Cube</h1>
+        <h2 id="time"></h2>
+        <div id="tab"></div>
+        <h1 id="counts"></h1>
+
+    </center>
+
+
+
+    <script>
+        var abc;
+        var n = 1;
+        var second = 30;
+        var rajeshCount = -1;
+        var flag = 1;
+
+        var rajeshInterval = setInterval(() => {
+            document.getElementById("time").innerHTML = second + "s";
+            second--;
+            if(second == -1){
+                clearInterval(rajeshInterval);
+                document.getElementById("counts").innerHTML = "Total number of click : " + rajeshCount;
+                flag=0;
+            }
+        }, 600);
+        table();
+
+
+
+        function table() {
+            n++;
+            abc = "";
+
+            rajeshCount++;
+
+            if (flag) {
+                if (n > 10) {
+                    n = 10;
+                }
+                console.log("frvgr");  
+                abc += "<table id='table'>";
+
+                for (let i = 0; i <= n; i++) {
+                    abc += "<tr>";
+                    for (let j = 0; j <= n; j++) {
+                        abc += "<td id=" + i + j + " ></td>";
+
+                    }
+                    abc += "</tr>";
+                }
+                abc += "</table>";
+
+                document.getElementById("tab").innerHTML = abc;
+
+                var rajeshI = Math.floor((Math.random() * n));
+                var rajeshJ = Math.floor((Math.random() * n));
+                var rajeshId = "" + rajeshI + rajeshJ;
+
+
+
+                let rajeshR = Math.floor((Math.random() * 255));
+                let rajeshG = Math.floor((Math.random() * 255));
+                let rajeshB = Math.floor((Math.random() * 255));
+
+                var rajeshColor = `rgba(${rajeshR},${rajeshG},${rajeshB})`;
+                var rajeshColor2 = `rgba(${rajeshR},${rajeshG},${rajeshB},0.6)`;
+
+                for (let i = 0; i <= n; i++) {
+                    for (let j = 0; j <= n; j++) {
+
+                        document.getElementById(("" + i + j)).style.backgroundColor = rajeshColor;
+                    }
+                }
+
+                document.getElementById(rajeshId).style.backgroundColor = rajeshColor2;
+                document.getElementById(rajeshId).addEventListener("click", table);
+
+            } 
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

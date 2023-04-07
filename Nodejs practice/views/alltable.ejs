@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+        table,
+        td,
+        th {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+ table{
+    margin-bottom:20px ;
+ }
+        td {
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Data</h1>
+
+    <% var i = 0%>
+    <% for (var j=0;j < 10; j++) { %>
+        <table>
+
+            <tr>
+                <th>Student Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>DOB</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Collage</th>
+                <th>City</th>
+            </tr>
+            <% for(i;i <10*(j+1); i++) { %>
+                <tr>
+
+                    <td><%= result[i].student_id %></td>
+                    <td><%= result[i].firstname %></td>
+                    <td><%= result[i].lastname %></td>
+                    <td><%= result[i].dob.getDate()%>-<%=result[i].dob.getMonth()%>-<%=result[i].dob.getFullYear() %></td>
+                    <td><%= result[i].contact %></td>
+                    <td><%= result[i].email %></td>
+                    <td><%= result[i].collage %></td>
+                    <td><%= result[i].city %></td>
+
+                </tr>
+                <% } %>
+
+        </table>
+        <% } %>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        td {
+            border: 6px solid black;
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        #reset {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <table>
+            <tr>
+                <td id="1" onclick="tic(this)"></td>
+                <td id="2" onclick="tic(this)"></td>
+                <td id="3" onclick="tic(this)"></td>
+            </tr>
+            <tr>
+                <td id="4" onclick="tic(this)"></td>
+                <td id="5" onclick="tic(this)"></td>
+                <td id="6" onclick="tic(this)"></td>
+            </tr>
+            <tr>
+                <td id="7" onclick="tic(this)"></td>
+                <td id="8" onclick="tic(this)"></td>
+                <td id="9" onclick="tic(this)"></td>
+            </tr>
+        </table>
+        <h1 id="win"></h1>
+        <button id="reset" onclick="resetval()">RePlay</button>
+    </center>
+</body>
+<script>
+
+    var rajeshn = 0;
+    let rajesh = 0;
+    const rajesharr = [];
+
+
+    function tic(flag) {
+
+        rajeshn++;
+
+        if (flag.innerHTML == "" && rajesh == 0) {
+
+            if (rajeshn % 2 == 0) {
+
+                flag.innerHTML = "X";
+                rajesharr[flag.id] = "X";
+                let val = "X";
+
+                if ((rajesharr[1] == val && rajesharr[2] == val && rajesharr[3] == val) || (rajesharr[4] == val && rajesharr[5] == val && rajesharr[6] == val) || (rajesharr[7] == val && rajesharr[8] == val && rajesharr[9] == val) || (rajesharr[1] == val && rajesharr[4] == val && rajesharr[7] == val) || (rajesharr[2] == val && rajesharr[5] == val && rajesharr[8] == val) || (rajesharr[3] == val && rajesharr[6] == val && rajesharr[9] == val) || (rajesharr[1] == val && rajesharr[5] == val && rajesharr[9] == val) || (rajesharr[3] == val && rajesharr[5] == val && rajesharr[7] == val)) {
+                    document.getElementById("win").innerHTML = "X winner";
+                    window.confirm("X is Winner!!!");
+                    document.getElementById("reset").style.display = "block";
+                    rajesh = 1;
+                }
+
+            } else {
+
+                flag.innerHTML = "O";
+                rajesharr[flag.id] = "O";
+                let val = "O";
+
+                if ((rajesharr[1] == val && rajesharr[2] == val && rajesharr[3] == val) || (rajesharr[4] == val && rajesharr[5] == val && rajesharr[6] == val) || (rajesharr[7] == val && rajesharr[8] == val && rajesharr[9] == val) || (rajesharr[1] == val && rajesharr[4] == val && rajesharr[7] == val) || (rajesharr[2] == val && rajesharr[5] == val && rajesharr[8] == val) || (rajesharr[3] == val && rajesharr[6] == val && rajesharr[9] == val) || (rajesharr[1] == val && rajesharr[5] == val && rajesharr[9] == val) || (rajesharr[3] == val && rajesharr[5] == val && rajesharr[7] == val)) {
+                    document.getElementById("win").innerHTML = "O winner";
+                    window.confirm("O is Winner!!!");
+                    document.getElementById("reset").style.display = "block";
+                    rajesh = 1;
+                }
+            }
+        }
+
+        rajesharrSize = rajesharr.join("");
+        console.log(rajesharrSize.length);
+        if (rajesharrSize.length == 9 && rajesh == 0) {
+
+            document.getElementById("win").innerHTML = "DROW!!!!";
+            document.getElementById("reset").style.display = "block";
+
+
+        }
+    }
+
+    function resetval() {
+        document.getElementById("win").innerHTML = "";
+        document.getElementById("1").innerHTML = "";
+        document.getElementById("2").innerHTML = "";
+        document.getElementById("3").innerHTML = "";
+        document.getElementById("4").innerHTML = "";
+        document.getElementById("5").innerHTML = "";
+        document.getElementById("6").innerHTML = "";
+        document.getElementById("7").innerHTML = "";
+        document.getElementById("8").innerHTML = "";
+        document.getElementById("9").innerHTML = "";
+        for (i = 0; i <= 9; i++) {
+            rajesharr[i] = "";
+        }
+        rajesh = 0;
+    }
+
+
+</script>
+
+</html>

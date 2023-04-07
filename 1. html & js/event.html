@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+    <style>
+        table{
+            
+            height: auto;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table,td{
+            border:2px solid black;
+        }
+        tr{
+            height: 50px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body onload="window.alert('Hello welcome')">
+    <table border="10">
+        <tr>
+            <td onclick="clickevent(this)">onclick</td>
+            <td onmouseover="onOver(this)">onmouseover</td>
+        </tr>
+        <tr>
+            <td onmouseout="onOut(this)">onmouseout</td>
+            <td onmousedown="onDown(this)" >onmousedown</td>
+        </tr>
+        <tr>
+            <td onmouseup="onUp(this)">onmouseup</td>
+            <td onmousemove="onMove(this)">onmousemove</td>
+        </tr>
+        
+    </table>
+    <script>
+        function clickevent(id){
+            id.style.color="yellow";
+            id.style.backgroundColor="#234534";
+            id.innerHTML="ONCLICK";
+        }
+
+        function onOver(id){
+            id.style.color="green";
+            id.style.backgroundColor="#545656";
+        }
+
+        function onOut(id){
+            id.style.color="red";
+            id.style.textSize="23px"
+            id.style.backgroundColor="#534034";
+        }
+
+        function onDown(id){
+            id.style.color="#234565";
+            id.style.backgroundColor="#278674";
+        }
+
+        function onUp(id){
+            id.style.color="yellow";
+            id.style.backgroundColor="#438767";
+        }
+
+        function onMove(id){
+            id.style.color="#123423";
+            id.style.backgroundColor="blue";
+        }
+
+        function dbClick(id){
+            id.style.color="#676754";
+            id.style.backgroundColor="#234534";
+            id.innerHTML="HELLO";
+        }
+
+    </script>
+</body>
+</html>

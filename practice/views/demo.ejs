@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <table>
+        
+        <tr>
+            <td>FirstName :</td>
+            <td><input type="text" id="first" /></td>
+        </tr>
+        <tr>
+            <td>LastName :</td>
+            <td><input type="text" id="last" /></td>
+        </tr>
+        <tr>
+            <td>Email :</td>
+            <td><input type="text" id="email" /></td>
+        </tr>
+        <tr>
+            <td>Collage :</td>
+            <td><input type="text" id="collage" /></td>
+        </tr>
+        <tr>
+            <td>City :</td>
+            <td><input type="text" id="city" /></td>
+        </tr>
+    </table>
+    <div id="save" onclick="insertData()">Save</div>
+    <script>
+ function insertData(){
+    var firstname = document.getElementById("first").value;
+    var lastname = document.getElementById("last").value;
+    var email = document.getElementById("email").value;
+    var collage = document.getElementById("collage").value;
+    var city =document.getElementById("city").value;
+    
+    fetch("http://localhost:7676/saveData",{
+        method:"POST",
+        body:JSON.stringify({
+            firstname:`"${firstname}"`,
+            lastname:`"${lastname}"`,
+            email:`"${email}"`,
+            collage:`"${collage}"`,
+            city:`"${city}"`
+        }),
+        
+        headers:{
+             "Content-type": "application/json; charset=UTF-8"
+            }
+    })
+    .then(response=>response.json())
+    .then(json=>{
+        console.log(json);
+        console.log("inserted");
+    });
+}
+    </script>
+</body>
+</html>

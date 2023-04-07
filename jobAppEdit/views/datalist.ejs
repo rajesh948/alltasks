@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+        .loader {
+            margin: auto;
+  border: 16px dotted rgb(18, 72, 20);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(60deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+        body {
+            background-color: rgb(142, 181, 141);
+        }
+
+        #candidatedata {
+            width: 100%;
+        }
+
+        table,
+        td,
+        th {
+            margin: auto;
+            font-size: large;
+            border: 2px solid rgb(33, 80, 48);
+            border-collapse: collapse;
+        }
+
+        th {
+            cursor: pointer;
+            background-color: rgb(66, 125, 65);
+            color: rgb(200, 224, 190);
+            font-size: x-large;
+        }
+
+        .headerid {
+            text-decoration: none;
+            color: rgb(200, 224, 190);
+        }
+
+        tr:nth-child(even) {
+            background-color: rgb(139, 195, 137);
+
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgb(181, 230, 181);
+
+        }
+
+        td {
+            text-align: center;
+
+        }
+
+        #pgn {
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .pageno {
+            display: inline-block;
+            text-align: center;
+            border: 2px solid rgb(132, 213, 139);
+            border-radius: 20px;
+            background-color: rgb(29, 143, 38);
+        }
+
+        #pageno1 {
+            display: inline-block;
+            text-align: center;
+            border: 2px solid rgb(22, 88, 19);
+            border-radius: 20px;
+            background-color: rgb(132, 213, 139);
+        }
+
+
+        #searchfield {
+            margin-top: 10px;
+            border: 3px solid green;
+            border-radius: 3px;
+            width: 500px;
+            height: 30px;
+            display: inline-block;
+        }
+
+        #select1 {
+            margin-top: 10px;
+            border: 3px solid green;
+            border-radius: 3px;
+            width: 60px;
+            height: 30px;
+            display: inline-block;
+        }
+
+        #button {
+
+            height: 25px;
+            border-radius: 3px;
+            display: inline-block;
+            border: 2px solid green;
+            background-color: rgb(95, 128, 60);
+        }
+
+        #searchbtn {
+            padding-left: 20px;
+            padding-right: 20px;
+            text-decoration: none;
+            color: black;
+            font-size: larger;
+        }
+
+        h1 {
+            border: 1px solid rgb(95, 128, 60);
+            background-color: rgb(15, 88, 18);
+            color: rgb(70, 204, 110);
+            text-align: center;
+        }
+
+        #searchbox {
+            display: inline-block;
+
+            margin: 10px;
+            margin-left: 400px;
+        }
+
+        #link {
+            padding-top: 20px;
+            width: fit-content;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>- firstname</td>
+            <td>~ lastname</td>
+            <td>% phone</td>
+            <td>* email</td>
+            <td>! state</td>
+            <td>: city</td>
+        </tr>
+    </table>
+    <div id="searchbox">
+        <select name="option" id="select1">
+            <option value="OR">OR</option>
+            <option value="AND">AND</option>
+        </select>
+        <input type="search"  id="searchfield"/>
+        <div id="button"><span id="searchbtn" onclick="searchquery()">Search</span></div>
+    </div>
+    <h1>Candidate Data</h1>
+
+  <div id="tableprint"></div>
+    <script>
+       
+
+     getTabledata("1","","","or","asc","cnd_id");
+
+      async  function getTabledata(pageno,searchstring,displaystring,option,order,sort){
+        
+        const ans = await fetch(`http://localhost:8070/datalist?no=${pageno}&stringsearch=${searchstring}&str=${displaystring}&option=${option}&order=${order}&sort=${sort}`);
+        var getdata = await ans.json();
+
+      var data = getdata[0];
+    
+      if(data.order == 'asc'){data.order='desc'}else{data.order='asc'} 
+
+        var tablequery = `
+    <table id="candidatedata">
+
+        <tr>
+            <th> </th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','cnd_id')">Id</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','firstname')">FirstName</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','lastname')">LastName</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','designation')">Designation</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','address1')">Address1</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','email')">Email</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','city')">City</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','gender')">Gender</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','state')">State</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','relation')">Relation</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','zipcode')">Zip Code</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','address2')">Address2</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','phone')">Phone</th>
+            <th onclick="getTabledata('1','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','dob')">DOB</th>
+            <th colspan="2">Action</th>
+        </tr>`;
+        
+      var data = getdata[0].result;
+
+     for(let i=0;i<data.length;i++){ 
+        tablequery+= `<tr id="tr${data[i].cnd_id}" >
+                <td>
+                    <input type="checkbox" value="${data[i].cnd_id}" class="deleteId" name="deleteid"/>
+                </td>
+                <td>
+                    ${data[i].cnd_id} 
+                </td>
+                <td>
+                    ${data[i].firstname} 
+                </td>
+                <td>
+                    ${data[i].lastname}   
+                </td>
+                <td>
+                    ${data[i].designation}  
+                </td>
+                <td>
+                    ${data[i].address1}  
+                </td>
+                <td>
+                    ${data[i].email}    
+                </td>
+                <td>
+                    ${data[i].city} 
+                </td>
+                <td>
+                    ${data[i].gender} 
+                </td>
+                <td>
+                    ${data[i].state} 
+                </td>
+                <td>
+                    ${data[i].relation} 
+                </td>
+                <td>
+                    ${data[i].zipcode} 
+                </td>
+                <td>
+                    ${data[i].address2}      
+               </td>
+                <td>
+                    ${data[i].phone} 
+                </td>
+                <td>
+                    ${data[i].dob} 
+                </td>
+                <td>
+                    <div id="button"><span onclick="deleterecord('${data[i].cnd_id}')">Delete</span></div>
+                </td>
+                <td>
+                    <div id="button"><a href="/editform?cndId=${data[i].cnd_id}">Edit</a></div>
+                </td>
+            </tr>`;
+      
+    }
+    tablequery+=` </table>
+    <div id="button"><span id="searchbtn" onclick="deleteall()">Delete All</span></div>`;
+    data = getdata[0];
+
+      if(data.order == 'asc'){data.order='desc'}else{data.order='asc'} 
+    tablequery+=` <div id="link">`;
+        for(let n=0;n < data.total;n++){ 
+            if(n==(data.key-1)){
+                tablequery+=`  <div id="pageno1"><span id="pgn" onclick="getTabledata('${n+1}','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','${data.sort}')">${n+1}</span></div>`;
+                 }else{
+                    tablequery+=`<div class="pageno"><span id="pgn"  onclick="getTabledata('${n+1}','${data.stringsearch}','${data.stringsearch2}','${data.option}','${data.order}','${data.sort}')">${n+1}</span></div>`
+                    }
+                        }
+   tablequery+=` </div>`;
+   document.getElementById('tableprint').innerHTML='<div class="loader"></div>';
+   setTimeout(function(){
+
+       document.getElementById('tableprint').innerHTML = tablequery;
+   },500);
+
+        }
+
+
+        function searchquery() {
+            var str =   document.getElementById('searchfield').value;;
+            var str2 =   document.getElementById('searchfield').value;;
+
+            var selectElement = document.getElementById('select1');
+            var output = selectElement.value;
+            console.log(output);
+            str = str.replace(/ /g, '');
+            str = str.replace(/-/g, ' firstname=');
+            str = str.replace(/~/g, ' lastname=');
+            str = str.replace(/%/g, ' phone=');
+            str = str.replace(/\*/g, ' email=');
+            str = str.replace(/!/g, ' state=');
+            str = str.replace(/:/g, ' city=');
+            getTabledata('1',str,str2,output,'asc','cnd_id');
+      }
+
+        async function deleterecord(recordId) {
+            console.log(recordId);
+            console.log(`tr${recordId}`);
+            if (confirm(`Do you want to delete ${recordId} Record ?`)) {
+               document.getElementById(`tr${recordId}`).style.display = "none";
+                const ans = await fetch(`http://localhost:8070/deleterecord?cd_id=${recordId}`);
+           }
+        }
+
+        async function deleteall() {
+
+            var checkedValue = [];
+
+            var ids = document.getElementsByClassName('deleteId');
+            for (var i = 0; i < ids.length; i++) {
+                if (ids[i].checked) {
+                    checkedValue.push(ids[i].value);
+                }
+            }
+
+            console.log(checkedValue);
+            if (confirm(`Do you want to delete  Records ?`)) {
+                for (let i = 0; i < checkedValue.length; i++) {
+
+                    document.getElementById(`tr${checkedValue[i]}`).style.display = "none";
+                }
+
+                const ans = await fetch(`http://localhost:8070/deleterecord?cd_id=${checkedValue}`);
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>

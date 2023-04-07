@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+        body {
+            background-color: rgb(142, 181, 141);
+        }
+
+        #candidatedata {
+            width: 100%;
+        }
+
+        table,
+        td,
+        th {
+            margin: auto;
+            font-size: large;
+            border: 2px solid rgb(33, 80, 48);
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: rgb(66, 125, 65);
+            color: rgb(200, 224, 190);
+            font-size: x-large;
+        }
+
+        .headerid {
+            text-decoration: none;
+            color: rgb(200, 224, 190);
+        }
+
+        tr:nth-child(even) {
+            background-color: rgb(139, 195, 137);
+
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgb(181, 230, 181);
+
+        }
+
+        td {
+            text-align: center;
+
+        }
+
+        #pgn {
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .pageno {
+            display: inline-block;
+            text-align: center;
+            border: 2px solid rgb(132, 213, 139);
+            border-radius: 20px;
+            background-color: rgb(29, 143, 38);
+        }
+
+        #pageno1 {
+            display: inline-block;
+            text-align: center;
+            border: 2px solid rgb(22, 88, 19);
+            border-radius: 20px;
+            background-color: rgb(132, 213, 139);
+        }
+
+
+        #searchfield {
+            margin-top: 10px;
+            border: 3px solid green;
+            border-radius: 3px;
+            width: 500px;
+            height: 30px;
+            display: inline-block;
+        }
+
+        #select1 {
+            margin-top: 10px;
+            border: 3px solid green;
+            border-radius: 3px;
+            width: 60px;
+            height: 30px;
+            display: inline-block;
+        }
+
+        #button {
+
+            height: 25px;
+            border-radius: 3px;
+            display: inline-block;
+            border: 2px solid green;
+            background-color: rgb(95, 128, 60);
+        }
+
+        #searchbtn {
+            padding-left: 20px;
+            padding-right: 20px;
+            text-decoration: none;
+            color: black;
+            font-size: larger;
+        }
+
+        h1 {
+            border: 1px solid rgb(95, 128, 60);
+            background-color: rgb(15, 88, 18);
+            color: rgb(70, 204, 110);
+            text-align: center;
+        }
+
+        #searchbox {
+            display: inline-block;
+
+            margin: 10px;
+            margin-left: 400px;
+        }
+
+        #link {
+            padding-top: 20px;
+            width: fit-content;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>- firstname</td>
+            <td>~ lastname</td>
+            <td>% phone</td>
+            <td>* email</td>
+            <td>! state</td>
+            <td>: city</td>
+        </tr>
+    </table>
+    <div id="searchbox">
+        <select name="option" id="select1">
+            <option value="OR">OR</option>
+            <option value="AND">AND</option>
+        </select>
+        <input type="search" value="<%=stringsearch2%>" id="searchfield"  />
+        <div id="button"><a id="searchbtn" href="" onclick="searchquery()">Search</a></div>
+    </div>
+
+    <script>
+
+
+
+
+        function searchquery() {
+            var str = document.getElementById("searchfield").value;
+            var str2 = str;
+
+            var selectElement = document.getElementById('select1');
+            var output = selectElement.value;
+            console.log(output);
+            str = str.replace(/ /g, '');
+            str = str.replace(/-/g, ' firstname=');
+            str = str.replace(/~/g, ' lastname=');
+            str = str.replace(/%/g, ' phone=');
+            str = str.replace(/\*/g, ' email=');
+            str = str.replace(/!/g, ' state=');
+            str = str.replace(/:/g, ' city=');
+            document.getElementById('searchbtn').setAttribute('href', `/datalist?option=${output}&stringsearch=${str}&str=${str2}`);
+        }
+
+
+
+    </script>
+    <h1>Candidate Data</h1>
+
+    <table id="candidatedata">
+
+        <tr>
+            <th> </th>
+            <th>Candidate Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Designation</th>
+            <th>Address1</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>Gender</th>
+            <th>State</th>
+            <th>Relation</th>
+            <th>Zip Code</th>
+            <th>Address2</th>
+            <th>Phone</th>
+            <th>Date Of Birth</th>
+            <th>Action</th>
+        </tr>
+        <% for(let i=0;i<result.length;i++){ %>
+            <tr id="tr<%= result[i].cnd_id %>">
+                <td>
+                    <input type="checkbox" value="<%= result[i].cnd_id %>" class="deleteId" name="deleteid">
+                </td>
+                <td>
+                    <%= result[i].cnd_id %>
+                </td>
+                <td>
+                    <%= result[i].firstname %>
+                </td>
+                <td>
+                    <%= result[i].lastname %>
+                </td>
+                <td>
+                    <%= result[i].designation %>
+                </td>
+                <td>
+                    <%= result[i].address1 %>
+                </td>
+                <td>
+                    <%= result[i].email %>
+                </td>
+                <td>
+                    <%= result[i].city %>
+                </td>
+                <td>
+                    <%= result[i].gender %>
+                </td>
+                <td>
+                    <%= result[i].state %>
+                </td>
+                <td>
+                    <%= result[i].relation %>
+                </td>
+                <td>
+                    <%= result[i].zipcode %>
+                </td>
+                <td>
+                    <%= result[i].address2 %>
+                </td>
+                <td>
+                    <%= result[i].phone %>
+                </td>
+                <td>
+                    <%= result[i].dob %>
+                </td>
+                <td>
+                    <div id="button"><span onclick="deleterecord(`<%=result[i].cnd_id%>`)">Delete</span></div>
+                </td>
+            </tr>
+            <%}%>
+    </table>
+    <div id="button"><span id="searchbtn" onclick="deleteall()">Delete All</span></div>
+
+    <script>
+        async function deleterecord(recordId) {
+            console.log(recordId);
+            console.log(`tr${recordId}`);
+            if (confirm(`Do you want to delete ${recordId} Record ?`)) {
+                document.getElementById(`tr${recordId}`).style.display = "none";
+                const ans = await fetch(`http://localhost:8080/deleterecord?cd_id=${recordId}`);
+
+
+            }
+
+        }
+
+        async function deleteall() {
+
+            var checkedValue = [];
+
+
+            var ids = document.getElementsByClassName('deleteId');
+            for (var i = 0; i < ids.length; i++) {
+                if (ids[i].checked) {
+                    checkedValue.push(ids[i].value);
+                }
+            }
+
+            console.log(checkedValue);
+            if (confirm(`Do you want to delete  Records ?`)) {
+                for (let i = 0; i < checkedValue.length; i++) {
+
+                    document.getElementById(`tr${checkedValue[i]}`).style.display = "none";
+                }
+
+                const ans = await fetch(`http://localhost:8080/deleterecord?cd_id=${checkedValue}`);
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>

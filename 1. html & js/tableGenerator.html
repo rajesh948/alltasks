@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+<form>
+	<label for="row">Rows</label><br>
+	<input type="number" id="row" ><br>
+	<label for="col">Cols</label><br>
+	<input type="number" id="col"><br><br>
+	<input type="submit" onclick="table()" value="Submit">
+  </form> 
+	<script>
+		function table(){
+			var row = document.getElementById('row').value;
+			var col = document.getElementById('col').value;
+
+		document.write("<table style='width:100%;height:auto;border-collapse:collapse;' border='1'>");
+				for(i=1;i<=row;i++){
+					document.write("<tr style='width:50px;'>");
+						for(j=1;j<=col;j++){
+							document.write("<td title="+i+j+" onclick='onCliclk"+i+j+"()' onclick='alert("+i +j+")'>demo</td>");
+						}
+						document.write("</tr>");
+				}
+				document.write("</table>");
+			}
+
+		
+	  </script>
+  
+</body>
+</html>

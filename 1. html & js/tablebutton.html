@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+	<input type="submit" onclick="table1()" value="increment">
+    <input type="submit" onclick="table2()" value="decrement">
+    
+ <div id="tab"></div>
+	<script>
+
+n=0;
+
+function table1(){
+table(n=n+1);
+}
+
+function table2(){
+table(n=n-1);
+}
+		function table(n){
+          
+   abc="";
+		abc+="<table style='width:100%;height:auto;border-collapse:collapse;' border='1'>";
+				for(i=1;i<=n;i++){
+					abc+="<tr style='width:50px;'>";
+						for(j=1;j<=n;j++){
+							abc+="<td title="+i+j+" onclick='alert("+i +j+")'>demo</td>";
+						}
+						abc+="</tr>";
+				}
+				abc+="</table>";
+                document.getElementById("tab").innerHTML=abc;
+			}
+
+		
+	  </script>
+  
+</body>
+</html>

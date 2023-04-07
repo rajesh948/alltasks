@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoB Application From</title>
+    <style>
+        fieldset {
+            border-width: 5px;
+            display: inline;
+            margin-bottom: 30px;
+            margin-right: 30px;
+            background-color: wheat;
+        }
+        legend{
+            font-weight: bold;
+            font-size: large;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        .btn {
+            margin: auto;
+            width: fit-content;
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+            background-color: rgb(220, 132, 76);
+            cursor: pointer;
+        }
+        h1{
+            margin: 0px;
+            border: 2px solid rgb(252, 250, 249);
+            background-color: brown;
+            text-align: center;
+            color: aqua;
+        }
+        #head{
+            
+            border: 2px solid rgb(215, 85, 30);
+        }
+        hr{
+            border: 1px solid black;
+        }
+        #btns{
+            width: fit-content;
+            margin: auto;
+        }
+        .btn2{
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px;
+            background-color: rgb(112, 189, 176);
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="head"><h1>Job Application Form</h1></div>
+    <form action="/editformdata?cnd_id=<%=cd_data[0].cnd_id%>" method="post">
+
+        <fieldset id="basicform">
+            <legend>Basic Detail</legend>
+            <table id="basicdetail">
+                <tr>
+                    <td><label for="fname">First Name</label></td>
+                    <td><input type="text" id="fname" value="<%=cd_data[0].firstname%>" name="firstname" required></td>
+                    <td><label for="lname">Last Name</label></td>
+                    <td><input type="text" id="lastname" value="<%=cd_data[0].lastname%>" name="lastname" required></td>
+                </tr>
+                <tr>
+                    <td><label for="dsn">Designation</label></td>
+                    <td><input type="text" id="dsn" name="designation" value="<%=cd_data[0].designation%>"required></td>
+                    <td><label for="addes1">Address 1</label></td>
+                    <td><textarea id="addes1" name="address1" value="aswzrbftgum" required><%=cd_data[0].address1%></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="email" id="email" name="email" value="<%=cd_data[0].email%>" required></td>
+                    <td><label for="addes2">Address 2</label></td>
+                    <td><textarea id="addes2" name="address2" value= required><%=cd_data[0].address2%></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="phone">Phone Number</label></td>
+                    <td><input type="tel" id="phone" name="phone" value="<%=cd_data[0].phone%>" required></td>
+                    <td><label for="state">State</label></td>
+                    <td> <select id="state" onchange="getcity()" name="state">
+                        <option>Select State</option>
+                        <% for(let i=0;i<state.length;i++){%>
+                        <%    if(state[i].statename == cd_data[0].state){ %>
+                            <option  value="<%=state[i].statename%>" selected><%=state[i].statename%></option>  
+                           <% }else{%>
+                            <option  value="<%=state[i].statename%>"><%=state[i].statename%></option>
+                        <%}%>
+                        <%}%>
+                        </select></td>
+                   
+                </tr>
+                <tr>
+                    <td><label for="gender">Gender</label></td>
+                    <td>
+                        <%-genderRadio%>
+                    </td>
+                    <td><label for="city">City</label></td>
+                    <td ><select id="selectcity" name="city">                   
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><label for="relstatus">Relationship Status</label></td>
+                    <td><select id="relstatus" name="relation">
+                        <% for(let i=0;i<relstatus.length;i++){%>
+                            <%    if(relstatus[i].statename == cd_data[0].relation){ %>
+                            <option value="<%=relstatus[i].rel%>" selected><%=relstatus[i].rel%></option>
+                            <%}else{%>  
+                            <option value="<%=relstatus[i].rel%>"><%=relstatus[i].rel%></option>
+                        <%}%> 
+                        <%}%>  
+                     
+                        </select></td>
+                        <td><label for="zip">Zip Code</label></td>
+                        <td><input type="text" id="zip" value="<%=cd_data[0].zipcode%>" name="zipcode" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><label for="dob">Date Of Birth</label></td>
+                    <td><input type="date" id="dob" name="dob" value="<%=cd_data[0].dob%>" required></td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset id="eduform">
+            <legend>Education Detail</legend>
+            <table id="edu">
+               <% for(let i=0;i<edu_data.length;i++){ %>
+        
+                <tr>
+                    <td><label for="course<%=i%>"><%=i+1%>. Course Name</label></td>
+                    <td><select id="course<%=i%>" name="course">
+                        <% for(let j=0;j<course.length;j++){ %>
+                            
+                            <%if (course[j].course == edu_data[i].course) {%>
+                            <option value="<%=course[j].course%>" selected><%=course[j].course%></option>
+                        <%}else{%>  
+                            <option value="<%=course[j].course%>"><%=course[j].course%></option>
+                        <%}%>
+                             <%}%> 
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><Label for="nob<%=i%>">Name Of Board</Label></td>
+                    <td><input type="text" id="nob<%=i%>" name="board"  value="<%=edu_data[i].board%>" required/></td>
+                    <td><Label for="pyear<%=i%>">Passing Year</Label></td>
+                    <td><input type="text" id="pyear<%=i%>" name="year" value="<%=edu_data[i].passingyear%>"  required/></td>
+                    <td><Label for="prt1">Percentage</Label></td>
+                    <td><input type="text" id="prt<%=i%>" name="percentage" value="<%=edu_data[i].percentage%>"  required/></td>
+                </tr>
+         
+                <%}%>
+                
+            </table>
+            <div onclick="addedu()" class="btn">ADD Field</div>
+        </fieldset>
+
+        <fieldset id="expform">
+            <legend>Work Experience</legend>
+            <table id="experience">
+                <%for(let i=0;i<exp_data.length;i++){%>
+                <tr>
+                    <td><Label for="com<%=i+1%>"><%=i+1%>.Company Name</Label></td>
+                    <td><input type="text" id="com<%=i+1%>" name="compname" value="<%=exp_data[i].com_name%>" required/></td>
+                    <td><Label for="dsgn<%=i+1%>">Designation</Label></td>
+                    <td><input type="text" id="dsgn<%=i+1%>" name="expedesignation" value="<%=exp_data[i].designation%>"  required/></td>
+                    <td><Label for="fdate<%=i+1%>">From</Label></td>
+                    <td ><input type="date" id="fdate<%=i+1%>" name="fdate" value="<%=exp_data[i].startdate%>"  required/></td>
+                    <td><Label for="todate<%=i+1%>">To</Label></td>
+                    <td><input type="date" id="todate<%=i+1%>" name="todate" value="<%=exp_data[i].enddate%>" required/></td>
+                </tr>
+                <%}%>
+            </table>
+            <div onclick="addexp()" class="btn">ADD Field</div>
+        </fieldset>
+
+        <fieldset id="langform">
+            <legend>Language Known</legend>
+            <table id="language">
+               <%-langCheck%>
+            </table>
+        </fieldset>
+
+        <fieldset id="techform">
+            <legend>Technologies You Know</legend>
+            <table id="technologies">
+              <%-techRadio%>
+            </table>
+        </fieldset>
+
+
+        <fieldset id="refform">
+            <legend>Reference Contact</legend>
+            <table id="reference">
+                <tr>
+                    <td><Label for="name1">Name</Label></td>
+                    <td><input type="text" name="refnafnameion</Label></td>
+                    <td><input type="text" name="refrelation" id="relation1" value="<%=ref_data[0].relation%>" required/></td>
+                </tr>
+                <tr>
+                    <td><Label for="name2">Name</Label></td>
+                    <td><input type="text" name="refname" id="name2"  value="<%=ref_data[1].ref_name%>" required/></td>
+                    <td><Label for="contentno2">Contact Number</Label></td>
+                    <td><input type="text" name="refcontact" id="contentno2" value="<%=ref_data[1].ref_contact%>" required/></td>
+                    <td><Label for="relation2">Relation</Label></td>
+                    <td><input type="text" name="refrelation" id="relation2" value="<%=ref_data[1].relation%>" required/></td>
+                </tr>
+            </table>
+        </fieldset>
+
+
+        <fieldset id="prfform">
+            <legend>Preferances</legend>
+            <table id="Preferance">
+                <tr>
+                    <td><Label for="Prf">Preferd Location</Label></td>
+                    <td>
+                        <select id="prf" name="prflocation">
+                           
+                            <% for(let i=0;i<preflocation.length;i++){%>
+                                <%if(preflocation[i].preflocation == locationpre[0]){%>
+                                <option value="<%=preflocation[i].preflocation%>" selected><%=preflocation[i].preflocation%></option>
+                            <%}else{%> 
+                                <option value="<%=preflocation[i].preflocation%>"><%=preflocation[i].preflocation%></option>
+                            <%}%> 
+                            <%}%> 
+                        </select>
+                    </td>
+                    <td><Label for="notperiod">Notice Period</Label></td>
+                    <td><input type="text" name="noticeperiod" id="notperiod" value="<%=pref_data[0].notice_period%>" required/></td>
+                    <td><Label for="department">Department</Label></td>
+                    <td>
+                        <select name="department" id="department">
+                            <% for(let i=0;i<department.length;i++){%>
+
+                                <%if(department[i].department == pref_data[0].department){%>
+                                    <option value="<%=department[i].department%>" selected><%=department[i].department%></option>
+                                <%}else{%>
+                                <option value="<%=department[i].department%>"><%=department[i].department%></option>
+                            <%}%> 
+                            <%}%> 
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <select id="prf2" name="prflocation">
+                            <% for(let i=0;i<preflocation.length;i++){%>
+                                <%if(preflocation[i].preflocation == locationpre[1]){%>
+                                <option value="<%=preflocation[i].preflocation%>" selected><%=preflocation[i].preflocation%></option>
+                            <%}else{%> 
+                                <option value="<%=preflocation[i].preflocation%>"><%=preflocation[i].preflocation%></option>
+                            <%}%> 
+                            <%}%> 
+                        </select>
+                    </td>
+                    <td><Label for="expactedctc">Expected CTC</Label></td>
+                    <td><input type="text" name="expactedctc" id="expactedctc" value="<%=pref_data[0].expected_ctc%>" required/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <select id="prf3" name="prflocation">
+                            <% for(let i=0;i<preflocation.length;i++){%>
+                                <%if(preflocation[i].preflocation == locationpre[2]){%>
+                                <option value="<%=preflocation[i].preflocation%>" selected><%=preflocation[i].preflocation%></option>
+                            <%}else{%> 
+                                <option value="<%=preflocation[i].preflocation%>"><%=preflocation[i].preflocation%></option>
+                            <%}%> 
+                            <%}%> 
+                        </select>
+                    </td>
+                    <td><Label for="currentctc">Current CTC</Label></td>
+                    <td><input type="text" name="currentctc" id="currentctc" value="<%=pref_data[0].current_ctc%>"  required/></td>
+
+                </tr>
+            </table>
+        </fieldset>
+
+
+        <div id="btns"><input id="submit" class="btn2" type="submit" ><input id="reset" class="btn2" type="reset"></div>
+    </form>
+    <script>
+        var n = `<%=edu_data.length%>`;
+        n = parseInt(n);
+        var n2 = `<%=exp_data.length%>`;
+        n2 = parseInt(n2);
+        var n2 = 1;
+
+        function addedu() {
+            n += 1;
+            var tab = document.getElementById("edu");
+       
+            var trow1 = tab.insertRow();
+           
+           trow1.innerHTML =  ` <td><label for="course${n}">${n}. Course Name</label></td>
+                    <td><select id="course${n}" name="course">
+                        <% for(let i=0;i<course.length;i++){%>
+                            <option value="<%=course[i].course%>"><%=course[i].course%></option>
+                        <%}%>   
+    
+                        </select></td>`;
+            var trow2 = tab.insertRow();
+            trow2.innerHTML = `
+                <td><Label for="nob${n}">Name Of Board</Label></td>
+                <td><input type="text" id="nob${n}" name="board" required/></td>
+                <td><Label for="pyear${n}">Passing Year</Label></td>
+                <td><input type="text" id="pyear${n}" name="year" required/></td>
+                <td><Label for="prt${n}">Percentage</Label></td>
+                <td><input type="text" id="prt${n}" name="percentage" required/></td>
+            `;
+
+        }
+
+
+        function addexp() {
+            n2 += 1;
+            var tab = document.getElementById("experience");
+        
+            var trow = tab.insertRow();
+
+            trow.innerHTML = `  <tr>
+                    <td><Label for="com${n2}">${n2}. Company Name</Label></td>
+                    <td><input type="text" id="com${n2}" name="compname" required/></td>
+                    <td><Label for="dsgn${n2}">Designation</Label></td>
+                    <td><input type="text" id="dsgn${n2}" name="expedesignation" required/></td>
+                    <td><Label for="fdate${n2}">From</Label></td>
+                    <td><input type="date" id="fdate${n2}" name="fdate" required/></td>
+                    <td><Label for="todate${n2}">To</Label></td>
+                    <td><input type="date" id="todate${n2}" name="todate" required/></td>
+                </tr>`;
+        }
+
+
+        getcity();
+
+    async function getcity(){
+      var state =   document.getElementById("state").value;
+        console.log(state.value);
+        const ans = await fetch(`http://localhost:8070/getcity?statename=${state}`);
+
+        const data = await ans.json();
+      
+        var selectcity = document.getElementById('selectcity');
+        selectcity.innerHTML="";
+    
+       for(let i=0;i<data.length;i++){
+        if(data[i].cityname == `<%=cd_data[0].city%>`){
+            selectcity.innerHTML += `<option value="${data[i].cityname}" selected>${data[i].cityname}</option>`;
+        }else{
+            selectcity.innerHTML+= `<option value="${data[i].cityname}">${data[i].cityname}</option>`;
+        }
+       }
+
+
+    }
+    
+    </script>
+</body>
+
+</html>

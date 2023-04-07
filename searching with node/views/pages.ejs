@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+        body {
+            background-color: rgb(142, 181, 141);
+        }
+
+        table,
+        td,
+        th {
+            margin: auto;
+            font-size: large;
+            border: 2px solid rgb(33, 80, 48);
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: rgb(66, 125, 65);
+            color: rgb(200, 224, 190);
+            padding: 10px;
+            font-size: x-large;
+        }
+
+        .headerid {
+            text-decoration: none;
+            color: rgb(200, 224, 190);
+        }
+
+        tr:nth-child(even) {
+            background-color: rgb(139, 195, 137);
+
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgb(181, 230, 181);
+
+        }
+
+        td {
+            text-align: center;
+            padding: 5px;
+        }
+
+       #searchfield{
+        margin-top: 10px;
+        border: 3px solid green;
+        border-radius: 3px;
+        width: 500px;
+        height: 30px;
+        display: inline-block;
+       }
+
+     #button{
+
+        height: 25px;
+        border-radius: 3px;
+        display:inline-block;
+        border: 2px solid green;
+        background-color: rgb(95, 128, 60) ;
+     }
+
+     #searchbtn {
+              padding-left: 20px;
+              padding-right: 20px;
+              text-decoration: none;
+              color: black;
+              font-size: larger;
+        }
+
+        h1 {
+            border: 1px solid rgb(95, 128, 60);
+            background-color: rgb(15, 88, 18);
+            color: rgb(70, 204, 110);
+            text-align: center;
+        }
+
+      #searchbox{
+        display: inline-block;
+        margin:auto ;
+      }
+    
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>@ firstname</td>
+            <td>> lastname</td>
+            <td>$ contact</td>
+            <td>* email</td>
+            <td>^ collage</td>
+            <td>+ city</td>
+        </tr>
+    </table>
+    <div id="searchbox">
+
+        <input type="search" value="<%=stringsearch%>" id="searchfield" onchange="searchquery(this.value)" />
+        <div id="button"><a id="searchbtn" href="">Search</a></div>
+    </div>
+
+    <script>
+        function searchquery(strquery){
+            var str = strquery;
+            var str2 = strquery;
+            str = str.replace('@','&firstname=');
+            str = str.replace('>','&lastname=');
+            str = str.replace('$','&contact=');
+            str = str.replace('*','&email=');
+            str = str.replace('^','&collage=');
+            str = str.replace('+','&city=');
+        document.getElementById('searchbtn').setAttribute('href',`/page?${str}&string=${str2}`);
+        }
+    </script>
+    <h1>Student Data</h1>
+    <table>
+
+        <tr>
+            <th>Student Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>DOB</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Collage</th>
+            <th>City</th>
+        </tr>
+        <% for(let i=0;i<result.length;i++){ %>
+            <tr>
+
+                <td>
+                    <%= result[i].student_id %>
+                </td>
+                <td>
+                    <%= result[i].firstname %>
+                </td>
+                <td>
+                    <%= result[ i].lastname %>
+                </td>
+                <td>
+                    <%= result[i].dob.getDate()%>-<%=result[i].dob.getMonth()%>-<%=result[i].dob.getFullYear() %>
+                </td>
+                <td>
+                    <%= result[i].contact %>
+                </td>
+                <td>
+                    <%= result[i].email %>
+                </td>
+                <td>
+                    <%= result[i].collage %>
+                </td>
+                <td>
+                    <%= result[i].city %>
+                </td>
+
+            </tr>
+            <%}%>
+
+
+</body>
+
+</html>
